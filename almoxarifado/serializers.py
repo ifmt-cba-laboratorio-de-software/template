@@ -7,6 +7,15 @@ class FornecedorSerializer(serializers.ModelSerializer):
         model = Fornecedor
         fields = ['id', 'nome', 'contato']
 
+    def validate_nome(self, value):
+        """Garantir que o nome do fornecedor seja único (case-insensitive)."""
+        qs = Fornecedor.objects.filter(nome__iexact=value)
+        if self.instance is not None:
+            qs = qs.exclude(pk=self.instance.pk)
+        if qs.exists():
+            raise serializers.ValidationError('Fornecedor com esse nome já existe.')
+        return value
+
 
 class ItemSerializer(serializers.ModelSerializer):
     fornecedor = FornecedorSerializer(read_only=True)

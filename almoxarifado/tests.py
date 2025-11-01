@@ -82,3 +82,16 @@ class FornecedorCRUDApiTests(TestCase):
         # subsequent get should return 404
         resp2 = self.client.get(f'/api/fornecedores/{self.f2.id}/')
         self.assertEqual(resp2.status_code, 404)
+
+    def test_create_duplicate_fornecedor_returns_400(self):
+        payload = {'nome': 'Fornecedor A', 'contato': 'dup@example.com'}
+        resp = self.client.post('/api/fornecedores/', payload, format='json')
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn('nome', resp.json())
+
+    def test_update_to_duplicate_nome_returns_400(self):
+        # attempt to change f2 nome to f1 nome
+        payload = {'nome': 'Fornecedor A'}
+        resp = self.client.patch(f'/api/fornecedores/{self.f2.id}/', payload, format='json')
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn('nome', resp.json())
