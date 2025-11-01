@@ -40,3 +40,45 @@ class ItemAPITests(TestCase):
             if fornecedor and fornecedor.get('nome') == 'Acme Ltda':
                 found = True
         self.assertTrue(found)
+
+
+class FornecedorCRUDApiTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        # create some fornecedores
+        self.f1 = Fornecedor.objects.create(nome='Fornecedor A', contato='a@example.com')
+        self.f2 = Fornecedor.objects.create(nome='Fornecedor B', contato='b@example.com')
+
+    def test_list_fornecedores(self):
+        resp = self.client.get('/api/fornecedores/')
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        # should return a list
+        self.assertTrue(isinstance(data, list) or isinstance(data, dict))
+
+    def test_create_fornecedor(self):
+        payload = {'nome': 'Fornecedor C', 'contato': 'c@example.com'}
+        resp = self.client.post('/api/fornecedores/', payload, format='json')
+        self.assertEqual(resp.status_code, 201)
+        data = resp.json()
+        self.assertEqual(data.get('nome'), payload['nome'])
+
+    def test_retrieve_fornecedor(self):
+        resp = self.client.get(f'/api/fornecedores/{self.f1.id}/')
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        self.assertEqual(data.get('nome'), self.f1.nome)
+
+    def test_update_fornecedor(self):
+        payload = {'contato': 'novo@example.com'}
+        resp = self.client.patch(f'/api/fornecedores/{self.f2.id}/', payload, format='json')
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        self.assertEqual(data.get('contato'), payload['contato'])
+
+    def test_delete_fornecedor(self):
+        resp = self.client.delete(f'/api/fornecedores/{self.f2.id}/')
+        self.assertIn(resp.status_code, (204, 200))
+        # subsequent get should return 404
+        resp2 = self.client.get(f'/api/fornecedores/{self.f2.id}/')
+        self.assertEqual(resp2.status_code, 404)
