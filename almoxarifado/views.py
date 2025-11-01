@@ -11,3 +11,15 @@ class ItemViewSet(viewsets.ModelViewSet):
     filterset_fields = ['localizacao', 'sku', 'fornecedor']  # fornecedor filters by id
     search_fields = ['nome', 'descricao', 'sku', 'fornecedor__nome']
     ordering_fields = ['nome', 'quantidade']
+
+
+from .models import Fornecedor
+from .serializers import FornecedorSerializer
+
+
+class FornecedorViewSet(viewsets.ModelViewSet):
+    queryset = Fornecedor.objects.all()
+    serializer_class = FornecedorSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['nome', 'contato']
+    ordering_fields = ['nome']

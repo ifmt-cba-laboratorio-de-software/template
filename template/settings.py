@@ -40,7 +40,20 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'almoxarifado',
+    'drf_spectacular',
 ]
+
+# Django REST Framework: usar drf-spectacular para geração de schema OpenAPI
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# Configurações do drf-spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Oficina II - API Almoxarifado',
+    'DESCRIPTION': 'API para controle de almoxarifado (itens, fornecedores, busca)',
+    'VERSION': '1.0.0',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
