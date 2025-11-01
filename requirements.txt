@@ -1,0 +1,7 @@
+asgiref==3.10.0
+Django==5.2.3
+django-filter==25.2
+djangorestframework==3.16.1
+sqlparse==0.5.3
+
+# requirements configurado para meu ambiente em particular, pode e DEVE ser ignorador

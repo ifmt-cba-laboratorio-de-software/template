@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_filters',
+    'almoxarifado',
 ]
 
 MIDDLEWARE = [
@@ -102,13 +105,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+# Time zone for Cuiabá
+TIME_ZONE = 'America/Cuiaba'
 
+# Internationalization
+# https://docs.djangoproject.com/en/5.2/topics/i18n/
 USE_I18N = True
 
+# Use timezone-aware datetimes
 USE_TZ = True
+
+# Default charset
+DEFAULT_CHARSET = 'utf-8'
+
+# Path to locale files for translations
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 
 # Static files (CSS, JavaScript, Images)
