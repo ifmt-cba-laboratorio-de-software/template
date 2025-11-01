@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.utils.translation import gettext_lazy as _
 from .models import Item, Fornecedor
 
 
@@ -13,7 +14,7 @@ class FornecedorSerializer(serializers.ModelSerializer):
         if self.instance is not None:
             qs = qs.exclude(pk=self.instance.pk)
         if qs.exists():
-            raise serializers.ValidationError('Fornecedor com esse nome já existe.')
+            raise serializers.ValidationError(_('Fornecedor com esse nome já existe.'))
         return value
 
 

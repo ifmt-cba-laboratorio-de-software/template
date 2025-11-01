@@ -1,10 +1,10 @@
 """
-WSGI config for template project.
+Configuração WSGI para o projeto `template`.
 
-It exposes the WSGI callable as a module-level variable named ``application``.
+Expõe o objeto WSGI no nível do módulo com o nome ``application``.
 
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
+Para mais informações sobre este arquivo (em português):
+https://docs.djangoproject.com/pt-br/5.2/howto/deployment/wsgi/
 """
 
 import os

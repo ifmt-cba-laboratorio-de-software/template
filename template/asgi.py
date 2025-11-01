@@ -1,10 +1,10 @@
 """
-ASGI config for template project.
+Configuração ASGI para o projeto `template`.
 
-It exposes the ASGI callable as a module-level variable named ``application``.
+Expõe o objeto ASGI no nível do módulo com o nome ``application``.
 
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
+Para mais informações sobre este arquivo (em português):
+https://docs.djangoproject.com/pt-br/5.2/howto/deployment/asgi/
 """
 
 import os
